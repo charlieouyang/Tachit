@@ -1,0 +1,130 @@
+// body {
+//     background-color: #348cb2 !important; 
+//     margin: 0;
+//     padding: 0;
+// }
+
+// #container {
+//     position: absolute;
+//     width: 100%;
+//     min-height: 100%;
+// }
+
+// #background { 
+//     background-image: url(../imgs/bg2.jpg);
+//     width: 100%;
+//     height: 370px;
+//     bottom: 0px;
+//     position: absolute;
+//     z-index: -1;
+// }
+
+// .home {
+//     .header {
+//         cursor: default;
+//         display: inline-block;
+//         opacity: 1;
+//         position: relative;
+//         text-align: center;
+//         top: -1em;
+//         vertical-align: middle;
+//         width: 100%;
+//         padding-bottom: 100px;
+
+//         h1 {
+//             font-size: 5em;
+//             font-weight: 900;
+//             letter-spacing: -0.035em;
+//             line-height: 80px;
+//             color: white;
+//             padding-top: 100px;
+//             -webkit-font-smoothing: antialiased;
+//         }
+        
+//         p {
+//             font-size: 1.25em;
+//             margin: 0.75em 0 0.25em 0;
+//             opacity: 1;
+//             color: white;
+//             -webkit-font-smoothing: antialiased;
+//         }
+
+//         nav {
+//             margin: 30px 20px 0 0;
+
+//             ul li {
+//                 display: inline-block;
+//                 width: 5.35em;
+//                 padding-bottom: 15px;
+//             }
+
+//             a {
+//                 color: white;
+//                 text-decoration: none;
+
+//                 span {
+//                     display: none;
+//                 }
+//             }
+
+//             a:before {
+//                 transition: all 0.2s ease-in-out;
+//                 border-radius: 100%;
+//                 border: solid 1px white;
+//                 display: block;
+//                 font-size: 1.75em;
+//                 line-height: 2.5em;
+//                 width: 2.5em;
+//             }
+
+//             a:hover {
+//                 font-size: 1.1em;
+//             }
+
+//             a:hover:before {
+//                 background-color: rgba(255, 255, 255, 0.175);
+//                 color: white;
+//             }
+
+//             a:active {
+//                 font-size: 0.95em;
+//                 background: none;
+//             }
+
+//             a:active:before {
+//                 background-color: rgba(255, 255, 255, 0.35);
+//                 color: white;
+//             }
+
+//             .icon {
+//                 font-family: FontAwesome;
+//                 -webkit-font-smoothing: antialiased;
+//             }
+//         }
+//     }
+
+//     .footer {
+//         background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.5) 75%);
+//         background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.5) 75%);
+//         background-image: -o-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.5) 75%);
+//         background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.5) 75%);
+//         background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.5) 75%);
+//         bottom: 0;
+//         line-height: 8em;
+//         position: absolute;
+//         text-align: center;
+//         width: 100%;
+
+//         .copyright-text {
+//             color: white;
+//             font-weight: 600;
+//             font-family: FontAwesome;
+//             -webkit-font-smoothing: antialiased;
+//         }
+
+//         .copyright-symbol {
+//             color: white;
+//             font-size: 18px;
+//         }
+//     }
+// }

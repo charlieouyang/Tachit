@@ -1,0 +1,28 @@
+{
+    "default": {
+        "mysql": {
+            "username": "root",
+            "password": "root",
+            "database": "link",
+            "dialect": "mysql",
+            "host": "localhost"
+        },
+        "s3": {
+            "accessKeyId": "AKIAJZUXHNLLC3H7H4AA",
+            "secret": "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",
+            "uploadPolicy": {
+                "expiration": "",
+                "conditions": [
+                    {
+                        "bucket": "www.linkprototype.com"
+                    },
+                    ["starts-with", "$key", ""], 
+                    {
+                        "acl": "public-read"
+                    },
+                    ["content-length-range", 0, 524288000]
+                ]
+            }
+        }
+    }
+}

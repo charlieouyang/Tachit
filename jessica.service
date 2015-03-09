@@ -1,0 +1,19 @@
+[Unit]
+Description=Jessica API Server
+After=syslog.target network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/Jessica/api/
+ExecStart=/usr/bin/node /var/www/Jessica/api/server.js
+
+RestartSec=2
+Restart=on-failure
+
+# use syslog for logging
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=jessica
+
+[Install]
+WantedBy=multi-user.target
