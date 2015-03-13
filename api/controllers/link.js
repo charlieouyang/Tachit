@@ -25,17 +25,7 @@ module.exports = function (router) {
     router.get('/link', function(req, res) {
         var dict = {};
 
-        dict.message ='Welcome to the Links API!!';
-        dict.endpoints = '------------------ Endpoint lists ------------------ \n \
-                            1) Link get - GET (check to see if URL is used or not /link/{link_url}) \n \
-                            2) Link create - POST (create a link and store this in DB /link) \n \
-                               Available Fields for POST \n \
-                                  "link_url": "" \n \
-                                  "name": "" \n \
-                                  "description": "" \n \
-                                  "media_type": "" \n \
-                                  "user_name": "" \n \
-                         ----------------------------------------------------';
+        dict.message ='Welcome to the Links API!! Only ballers come here!';
 
         res.statusCode = 200;
         res.json(dict);
