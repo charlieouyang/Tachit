@@ -31,15 +31,6 @@ module.exports = function (router) {
         res.json(dict);
     });
 
-    router.get('/test', function(req, res) {
-        var dict = {};
-
-        dict.message ='Welcome to the Links API!! Sanity testing for Charlie';
-
-        res.statusCode = 200;
-        res.json(dict);
-    });
-
     router.get('/link/:link_url', function(req, res) {
         Link.findAll({
             where: {link_url: req.params.link_url}
