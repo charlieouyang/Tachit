@@ -1,6 +1,6 @@
 {
-  "name": "link-api",
-  "description": "This is the API for Link",
+  "name": "Tachit-api",
+  "description": "This is the API for Tachit",
   "author": "charlieouyang",
   "license": "ISC",
   "main": "server.js",

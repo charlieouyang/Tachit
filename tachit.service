@@ -1,11 +1,11 @@
 [Unit]
-Description=Jessica API Server
+Description=Tachit API Server
 After=syslog.target network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/var/www/Jessica/api/
-ExecStart=/usr/bin/node /var/www/Jessica/api/server.js
+WorkingDirectory=/var/www/Tachit/api/
+ExecStart=/usr/bin/node /var/www/Tachit/api/server.js
 
 RestartSec=2
 Restart=on-failure
@@ -13,7 +13,7 @@ Restart=on-failure
 # use syslog for logging
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=jessica
+SyslogIdentifier=tachit
 
 [Install]
 WantedBy=multi-user.target

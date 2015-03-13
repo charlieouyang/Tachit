@@ -20,28 +20,7 @@ module.exports = function (router) {
             'created_at': 'created_at',
             'user_id': 'user_id'
         },
-        s3Config = require('../config/config.json')["default"].s3,
-        generatePolicy = function(mediaType) {
-            var policyUnfinished = s3Config.uploadPolicy,
-                currentDate = new Date(),
-                expirationDate,
-                contentTypeArr;
-
-            currentDate.setFullYear(currentDate.getFullYear() + 5);
-            expirationDate = currentDate.toISOString();
-            policyUnfinished.expiration = expirationDate;
-
-            contentTypeArr = ["starts-with", "$Content-Type", mediaType];
-            policyUnfinished.conditions.push(contentTypeArr);
-
-            return policyUnfinished;
-        },
-        generateSignature = function(policy) {
-            var encodedPolicy = new Buffer(JSON.stringify(policy)).toString("base64"),
-                secret = s3Config.secret;
-
-            return crypto.createHmac('sha1', secret).update(encodedPolicy).digest('base64');
-        };
+        s3Config = require('../config/config.json')["default"].s3;
 
     router.get('/link', function(req, res) {
         var dict = {};
@@ -55,7 +34,17 @@ module.exports = function (router) {
                                   "name": "" \n \
                                   "description": "" \n \
                                   "media_type": "" \n \
+                                  "user_name": "" \n \
                          ----------------------------------------------------';
+
+        res.statusCode = 200;
+        res.json(dict);
+    });
+
+    router.get('/link/test', function(req, res) {
+        var dict = {};
+
+        dict.message ='Welcome to the Links API!! Sanity testing for Charlie';
 
         res.statusCode = 200;
         res.json(dict);

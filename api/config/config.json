@@ -3,7 +3,7 @@
         "mysql": {
             "username": "root",
             "password": "root",
-            "database": "link",
+            "database": "tachit",
             "dialect": "mysql",
             "host": "localhost"
         },
