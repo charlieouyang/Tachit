@@ -2,12 +2,17 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/link/linkTemplate.html'
-], function($, _, Backbone, linkTemplate){
+  'text!templates/link/linkTemplate.html',
+  'models/link/LinkModel'
+], function($, _, Backbone, linkTemplate, LinkModel){
 
   var ProjectsView = Backbone.View.extend({
     el: $("#content"),
-    render: function(){
+    render: function(args){
+      var model = new LinkModel;
+
+      if (args.linkUrl)
+
       this.$el.html(linkTemplate);
     }
   });

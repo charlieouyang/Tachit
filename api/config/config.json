@@ -8,21 +8,16 @@
             "host": "localhost"
         },
         "s3": {
+            "bucket": "www.linkprototype.com",
             "accessKeyId": "AKIAJZUXHNLLC3H7H4AA",
             "secret": "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",
-            "uploadPolicy": {
-                "expiration": "",
-                "conditions": [
-                    {
-                        "bucket": "www.linkprototype.com"
-                    },
-                    ["starts-with", "$key", ""], 
-                    {
-                        "acl": "public-read"
-                    },
-                    ["content-length-range", 0, 524288000]
-                ]
-            }
+            "region": "us-east-1"
+        },
+        "media_types": {
+            "video": ".mp4",
+            "picture": ".png",
+            "voice": ".mp3",
+            "text": ".txt"
         }
     }
 }

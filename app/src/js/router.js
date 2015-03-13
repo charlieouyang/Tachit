@@ -23,7 +23,9 @@ define([
     app_router.on('route:getLink', function (id) {
         // Note the variable in the route definition being passed in here
         var linkView = new LinkView();
-        linkView.render();
+        linkView.render({
+          linkUrl: id
+        });
     });
 
     app_router.on('route:defaultAction', function (actions) {

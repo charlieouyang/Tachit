@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
             link_url: {
                 type: DataTypes.TEXT
             },
-            amazon_url: {
+            amazon_key: {
                 type: DataTypes.TEXT
             },
             name: {
@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
             media_type: {
                 type: DataTypes.TEXT
             },
-            user_id: {
+            user_name: {
                 type: DataTypes.TEXT
             },
             createdAt: {type: DataTypes.DATE, defaultValue: DataTypes.NOW}
