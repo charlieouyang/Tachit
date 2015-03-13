@@ -5,7 +5,7 @@ var express = require('express'),
     db = require('./models'),
     app = express(),
     bodyParser = require('body-parser'),
-    port = 8080,
+    port = 6080,
     controllers = require('./controllers');
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
