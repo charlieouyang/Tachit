@@ -2,4 +2,4 @@ app/node_modules
 app/.sass-cache
 
 api/node_modules
-api/config/configProduction.json
+api/config/configProd.json
