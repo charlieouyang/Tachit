@@ -41,7 +41,7 @@ module.exports = function (router) {
         res.json(dict);
     });
 
-    router.get('/link/test', function(req, res) {
+    router.get('/test', function(req, res) {
         var dict = {};
 
         dict.message ='Welcome to the Links API!! Sanity testing for Charlie';
