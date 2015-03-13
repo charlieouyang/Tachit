@@ -1,8 +1,6 @@
 #!/bin/bash
 
-cd /var/www/Tachit
-git pull
-cd api 
+cd /var/www/Tachit/api
 npm install
 cp /var/www/Tachit/tachit.service /lib/systemd/system/tachit.service
 systemctl daemon-reload
