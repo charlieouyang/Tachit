@@ -1,14 +1,25 @@
-## MODULAR BACKBONE
+# Tachit Web App
 
-authors: [Thomas Davis](https://github.com/thomasdavis), [Brandon Flowers](https://github.com/headwinds)
+This Web App is built using backboneJS, requireJS, and Mustache. It uses Grunt to build all of the dependencies required for deployment.
 
-![contributors](http://www.headwinds.net/lab/backbonetutorials/modular-backbone/contributors.png)
+## Main App Sections
 
-Learn how to use Backbone and Require together to create modular applications that are easy to maintain for solo and team-based projects. As you build your application, you will create many small javascript files with usually no more than 100 lines of code per file. Some developers say that each file does one thing, but we won't hold you to that but we do recommended trying to write smaller files and breaking up the tasks.  
+###Landing Page
 
-Once you have a working application and you're ready to go to production, you can apply R.js (or alternatively grunt.js) to minify and concatenate this code base into one javascript file that you'll deploy to your website.    
+**URL** - tachitnow.com
 
-[demo](http://backbonetutorials.com/examples/modular-backbone) | [discussion](http://backbonetutorials.com/organizing-backbone-using-modules/)
+This is the main page of the web app. The Tachit landing page should live here. Currently contains a string to indicate that it's the landing page.
 
+###View Link
 
- 
+**URL** - tachitnow.com/#link/{link_id}
+
+This is the URL where users can go and view the media that they've uploaded. If the link doesn't exist, it just routes to a link doesn't exist page. If it does, it will be smart enough to render the media (whether it's video, voice, picture or text). 
+
+**Examples**
+
+tachitnow.com/#link/lego - Shows video
+
+tachitnow.com/#link/al - Shows voice
+
+tachitnow.com/#link/ups - Shows picture
