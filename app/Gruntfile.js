@@ -37,6 +37,9 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'src/css/', src: ['font-awesome.min.css'], dest: 'build/css/'},
           {expand: true, cwd: 'src/', src: ['fonts/**'], dest: 'build/'},
 
+          //copying over configuration
+          {expand: true, cwd: 'src/', src: ['config/**'], dest: 'build/'},
+
           //copying over index.html
           {expand: true, cwd: 'src/', src: ['index.html'], dest: 'build/'}
         ]

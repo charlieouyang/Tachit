@@ -1,7 +1,7 @@
 define([
   'underscore',
   'backbone',
-  'config'
+  'text!../../../config/config.json'
 ], function(_, Backbone, appConfig) {
   
   var LinkModel = Backbone.Model.extend({
@@ -21,8 +21,11 @@ define([
     },
 
     sync: function (method, model, options){
+      var config;
+      
       if (method == 'read') {
-        options.url = appConfig.api.endpoint + model.url() + model.get('link_url');
+        config = JSON.parse(appConfig);
+        options.url = config.api.endpoint + model.url() + model.get('link_url');
       } else {
          options.url = model.url() + '/save'; 
       }
