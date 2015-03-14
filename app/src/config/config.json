@@ -1,0 +1,5 @@
+{
+    "api": {
+        "endpoint": "http://localhost:6080/api"
+    }
+}

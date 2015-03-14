@@ -1,7 +1,8 @@
 define([
   'underscore',
-  'backbone'
-], function(_, Backbone) {
+  'backbone',
+  'config'
+], function(_, Backbone, appConfig) {
   
   var LinkModel = Backbone.Model.extend({
     urlRoot: '/link',
@@ -21,7 +22,7 @@ define([
 
     sync: function (method, model, options){
       if (method == 'read') {
-        options.url = 'http://tachitnow.com/api' + model.url() + model.get('link_url');
+        options.url = appConfig.api.endpoint + model.url() + model.get('link_url');
       } else {
          options.url = model.url() + '/save'; 
       }
