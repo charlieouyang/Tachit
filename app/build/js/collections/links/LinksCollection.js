@@ -1,17 +1,19 @@
 define([
   'underscore',
   'backbone',
-  'models/contributor/ContributorModel'
-], function(_, Backbone, ContributorModel){
+  'models/ilnk/LinkModel'
+], function(_, Backbone, LinkModel){
 
   var ContributorsCollection = Backbone.Collection.extend({
       
-      model: ContributorModel,
+      model: LinkModel,
 
-      initialize : function(models, options) {},
+      initialize : function(models, options) {
+        this.linkUrl = options.linkUrl;
+      },
       
       url : function() {
-        return 'https://api.github.com/repos/thomasdavis/backbonetutorials/contributors';
+        return 'http://localhost:8080/api/link/' + this.linkUrl;
       },
     
       parse : function(data) {
