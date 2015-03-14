@@ -81,10 +81,10 @@ Links not found response
 Link post success response: 
 ```
 {
-    link_url: "test"
-    name: "Amazon delivery south park"
-    description: "hello there mr ups man amazon"
-    media_type: "picture"
+    link_url: "test",
+    name: "Amazon delivery south park",
+    description: "hello there mr ups man amazon",
+    media_type: "picture",
     presignedUploadURL: "https://s3.amazonaws.com/www.linkprototype.com/charlieouyang/1426366300859-charlieouyang.png?AWSAccessKeyId=AKIAJZUXHNLLC3H7H4AA&Expires=1426367200&Signature=h5HozVnpEdtW%2F3jzYFoNXeK8h2I%3D"
 }
 ```
@@ -95,18 +95,18 @@ Link exists already (HTTP Error Code 409) response
 {
     result: [
         {
-            id: 4
-            link_url: "test"
-            amazon_key: "charlieouyang/1426366300859-charlieouyang.png"
-            name: "Amazon delivery south park"
-            description: "hello there mr ups man amazon"
-            media_type: "picture"
-            user_name: "charlieouyang"
-            createdAt: "2015-03-14T20:51:40.000Z"
+            id: 4,
+            link_url: "test",
+            amazon_key: "charlieouyang/1426366300859-charlieouyang.png",
+            name: "Amazon delivery south park",
+            description: "hello there mr ups man amazon",
+            media_type: "picture",
+            user_name: "charlieouyang",
+            createdAt: "2015-03-14T20:51:40.000Z",
             updatedAt: "2015-03-14T20:51:40.000Z"
         }
-    ]
-    message: "Link already exists"
+    ],
+    message: "Link already exists",
     links_found: 1
 }
 ```
