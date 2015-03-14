@@ -21,7 +21,7 @@ define([
 
     sync: function (method, model, options){
       if (method == 'read') {
-        options.url = 'http://localhost:6080/api' + model.url() + model.get('link_url');
+        options.url = 'http://tachitnow.com/api' + model.url() + model.get('link_url');
       } else {
          options.url = model.url() + '/save'; 
       }
