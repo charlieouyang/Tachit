@@ -20,7 +20,14 @@ module.exports = function (router) {
             'created_at': 'created_at',
             'user_id': 'user_id'
         },
-        s3Config = require('../config/config.json')["default"].s3;
+        s3Config = require('../config/config.json')["default"].s3,
+        mediaTypes = require('../config/config.json')["default"].media_types;
+
+    AWS.config = {
+        "accessKeyId": s3Config.accessKeyId, 
+        "secretAccessKey": s3Config.secret, 
+        "region": s3Config.region
+    };
 
     router.get('/link', function(req, res) {
         var dict = {};
@@ -35,24 +42,39 @@ module.exports = function (router) {
         Link.findAll({
             where: {link_url: req.params.link_url}
         }).then(function(links) {
-            var dict = {};
+            var dict = {},
+                s3Instance,
+                params,
+                presignedUrl,
+                linkResult;
 
             if (links.length < 1) {
                 dict.message ='No links found';
                 dict.links_found = links.length;
                 res.statusCode = 200;
+                res.json(dict);
             } else if (links.length === 1) {
+                linkResult = links[0];
                 dict.result = links;
                 dict.message ='Found 1 link';
                 dict.links_found = links.length;
+
+                s3Instance = new AWS.S3();
+                params = {Bucket: s3Config.bucket, Key: linkResult.amazon_key};
+                s3Instance.getSignedUrl('getObject', params, function (err, url) {
+                    dict.presignedGetURL = url;
+                    res.statusCode = 200;
+                    res.json(dict);
+                });
+
                 res.statusCode = 200;
             } else {
                 dict.result = links;
                 dict.message ="Multiple links found... This shouldn't happen";
                 dict.links_found = links.length;
-                res.statusCode = 409;
+                res.statusCode = 200;
+                res.json(dict);
             }
-            res.json(dict);
         });
     });
 
@@ -82,11 +104,13 @@ module.exports = function (router) {
         }).then(function(links) {
             var dict = {},
                 date = new Date(),
-                mediaTypes = s3Config.media_types,
                 fileName;
 
             fileName = valid.user_name + "/" + date.getTime() + "-" + valid.user_name;
 
+            console.log("input type: " + valid.media_type);
+            console.log("s3Config %j", s3Config);
+            console.log("config media %j", mediaTypes);
             if (valid.media_type === "video") { 
                 fileName += mediaTypes.video;
             } else if (valid.media_type === "picture") {
@@ -110,12 +134,6 @@ module.exports = function (router) {
                         }
                     }
 
-                    AWS.config = {
-                        "accessKeyId": s3Config.accessKeyId, 
-                        "secretAccessKey": s3Config.secret, 
-                        "region": s3Config.region
-                    };
-
                     s3Instance = new AWS.S3();
                     params = {Bucket: s3Config.bucket, Key: fileName};
                     s3Instance.getSignedUrl('putObject', params, function (err, url) {
@@ -127,19 +145,6 @@ module.exports = function (router) {
                     /*
                     Sample upload curl call
                     curl --upload-file file.txt "https://s3.amazonaws.com/www.linkprototype.com/charlieouyang/1426197530645-charlieouyang.txt?AWSAccessKeyId=AKIAJZUXHNLLC3H7H4AA&Expires=1426198430&Signature=aKX1AJ0f7SSUKgVfxhaxJ0lmPPs%3D"
-                    */
-                    
-                    /*
-                    console.log("trying again");
-                    var s3 = new AWS.S3();
-                    var params = {Bucket: s3Config.bucket, Key: 'helloWorld.txt'};
-                    s3.getSignedUrl('getObject', params, function (err, url) {
-                        dict.presignedGetURL = url;
-                        res.statusCode = 201;
-                        res.json(dict);
-                    });
-
-                    console.log("Finishing up with S3");
                     */
 
                 }).catch(function(error) {

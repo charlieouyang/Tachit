@@ -6,20 +6,22 @@ define([
   var LinkModel = Backbone.Model.extend({
     urlRoot: '/link',
     defaults: {
+      presignedGetUrl: '',
       link_url: '',
-      amazon_url: '',
+      amazon_key: '',
       name: '',
       id: '',
       description: '',
       media_type: '',
       created_at: '',
       updated_at: '',
-      user_id: ''
+      user_name: '',
+      link_exist: false
     },
 
     sync: function (method, model, options){
       if (method == 'read') {
-        options.url = 'http://localhost:8080/api' + model.url() + model.get('link_url');
+        options.url = 'http://localhost:6080/api' + model.url() + model.get('link_url');
       } else {
          options.url = model.url() + '/save'; 
       }
@@ -27,22 +29,25 @@ define([
     },
 
     parse: function (response){
-        var result;
+      var result;
 
-        if (response.links_found !== 1) {
-            //No links found
-            return;
-        } 
+      if (response.links_found !== 1) {
+          //No links found
+          this.set("link_exist", false);
+          return;
+      } 
 
-        result = response.result[0];
-        this.set("amazon_url", result['amazon_url']);
-        this.set("name", result['name']);
-        this.set("description", result['description']);
-        this.set("media_type", result['media_type']);
-        this.set("created_at", result['createdAt']);
-        this.set("user_id", result['user_id']);
-        this.set("updated_at", result['updatedAt']);
-        this.set("id", result['id']);
+      result = response.result[0];
+      this.set("presignedGetUrl", response.presignedGetURL);
+      this.set("amazon_key", result['amazon_key']);
+      this.set("name", result['name']);
+      this.set("description", result['description']);
+      this.set("media_type", result['media_type']);
+      this.set("created_at", result['createdAt']);
+      this.set("user_name", result['user_name']);
+      this.set("updated_at", result['updatedAt']);
+      this.set("id", result['id']);
+      this.set("link_exist", true);
     }
   });
 
