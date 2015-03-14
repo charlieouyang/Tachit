@@ -1,5 +1,7 @@
 app/node_modules
 app/.sass-cache
+app/src/config
+app/build/config
 
 api/node_modules
 api/config/configProd.json
