@@ -3,7 +3,7 @@ define([
   'underscore',
   'backbone',
   'text!templates/home/homeTemplate.html'
-], function($, _, Backbone, SidebarView, homeTemplate){
+], function($, _, Backbone, homeTemplate){
 
   var HomeView = Backbone.View.extend({
     el: $("#content"),
