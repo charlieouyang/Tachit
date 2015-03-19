@@ -7,7 +7,7 @@ define([
   'models/link/LinkModel'
 ], function($, _, Backbone, Mustache, linkTemplate, LinkModel){
 
-  var ProjectsView = Backbone.View.extend({
+  var LinkView = Backbone.View.extend({
     el: $("#content"),
     render: function(args){
       var self = this,
@@ -56,5 +56,5 @@ define([
     }
   });
 
-  return ProjectsView;
+  return LinkView;
 });

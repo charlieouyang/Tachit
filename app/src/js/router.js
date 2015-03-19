@@ -4,15 +4,24 @@ define([
   'underscore',
   'backbone',
   'views/home/HomeView',
-  'views/link/LinkView'
-], function($, _, Backbone, HomeView, LinkView) {
+  'views/link/LinkView',
+  'views/navigation/NavigationView',
+  'views/footer/FooterView'
+], function($, _, Backbone, HomeView, LinkView, NavView, FooterView) {
   
   var AppRouter = Backbone.Router.extend({
     routes: {
-      // Define some URL routes
-      "link/:id": "getLink",
-      // Default
-      '*actions': 'defaultAction'
+      //Landing Page
+      "": "homePage",
+
+      //Admin page
+      "admin/:user_id": "adminPage",
+
+      //Tachit links pages
+      ":myId": "linkPage",
+
+      //404
+      '*actions': 'undefinedRoutes'
     }
   });
   
@@ -20,28 +29,34 @@ define([
 
     var app_router = new AppRouter;
 
-    app_router.on('route:getLink', function (id) {
-        // Note the variable in the route definition being passed in here
+    app_router.on('route:homePage', function (id) {
+        console.log("Hit home page: /");
+        var navView = new NavView();
+        var footerView = new FooterView();
+        var homeView = new HomeView();
+        navView.render();
+        footerView.render();
+        homeView.render();
+    });
+
+    app_router.on('route:adminPage', function (id) {
+        console.log("Hit admin page: admin/:user_id and user ID: " + id);
+    });
+
+    app_router.on('route:linkPage', function (id) {
         var linkView = new LinkView();
         linkView.render({
           linkUrl: id
         });
+        console.log("Hit ID page: :id");
     });
 
-    app_router.on('route:defaultAction', function (actions) {
-     
+    app_router.on('route:undefinedRoutes', function (actions) {
        // We have no matching route, lets display the home page 
-        var homeView = new HomeView();
-        homeView.render();
+        console.log("Hit 404 page");
     });
 
-    // Unlike the above, we don't call render on this view as it will handle
-    // the render call internally after it loads data. Further more we load it
-    // outside of an on-route function to have it loaded no matter which page is
-    // loaded initially.
-    //var footerView = new FooterView();
-
-    Backbone.history.start();
+    Backbone.history.start({pushState: true, root: '/'});
   };
   return { 
     initialize: initialize
