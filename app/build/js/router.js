@@ -16,9 +16,11 @@ define([
 
       //Admin page
       "admin/:user_id": "adminPage",
+      "admin/:user_id/": "adminPage",
 
       //Tachit links pages
       ":myId": "linkPage",
+      ":myId/": "linkPage",
 
       //404
       '*actions': 'undefinedRoutes'
