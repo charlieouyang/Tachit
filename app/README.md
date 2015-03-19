@@ -38,3 +38,25 @@ Picture
 ```
 tachitnow.com/#link/ups
 ```
+
+##Development
+
+**Github**
+
+Fork this repository, and clone it on your local machine.
+
+**npm**
+
+Navigate to the /app folder and run 
+```
+npm install
+```
+to install all of the dependencies for the web application.
+
+**grunt**
+
+Staying in the same /app directory, run the command 
+```
+grunt
+```
+and this will listen for all changes in the app and compile the necessary files and also run the web server
