@@ -110,3 +110,63 @@ Link exists already (HTTP Error Code 409) response
     links_found: 1
 }
 ```
+
+###Get Placement Clicks
+
+**URL** - tachitnow.com/api/click/{click_placement}
+
+Example: 
+```
+tachitnow.com/api/click/IOS_App_Link
+```
+
+**Request Type** - GET
+
+**Response** 
+ 
+
+```
+{
+result: [
+{
+id: 7
+click_placement: "IOS_App_Link"
+createdAt: "2015-03-23T21:06:39.000Z"
+updatedAt: "2015-03-23T21:06:39.000Z"
+},
+1:  {
+id: 8
+click_placement: "IOS_App_Link"
+createdAt: "2015-03-23T21:07:02.000Z"
+updatedAt: "2015-03-23T21:07:02.000Z"
+}]
+message: "Clicks found!"
+clicks_found: 2
+}
+```
+
+
+###Post Click to API (Register User Clicks)
+
+**URL** - tachitnow.com/api/click
+
+**Request Type** - POST
+
+**Request Payload** - content type must be ```application/json```
+
+```
+{
+    "click_placement": "IOS_App_Link"
+}
+```
+
+**Response** 
+
+Link post success response: 
+
+```
+{
+click_placement: "IOS_App_Link"
+message: "Click recorded!"
+}
+```
