@@ -139,8 +139,8 @@ tachitnow.com/api/click/IOS_App_Link
         click_placement: "IOS_App_Link"
         createdAt: "2015-03-23T21:07:02.000Z"
         updatedAt: "2015-03-23T21:07:02.000Z"
-    }]
-    message: "Clicks found!"
+    }],
+    message: "Clicks found!",
     clicks_found: 2
 }
 ```
@@ -166,7 +166,7 @@ Link post success response:
 
 ```
 {
-    click_placement: "IOS_App_Link"
+    click_placement: "IOS_App_Link",
     message: "Click recorded!"
 }
 ```
