@@ -17,7 +17,7 @@ This is the main page of the web app. The Tachit landing page should live here. 
 
 **URL** 
 ```
-tachitnow.com/#link/{link_id}
+tachitnow.com/{link_id}
 ```
 
 This is the URL where users can go and view the media that they've uploaded. If the link doesn't exist, it just routes to a link doesn't exist page. If it does, it will be smart enough to render the media (whether it's video, voice, picture or text). 
@@ -26,17 +26,17 @@ This is the URL where users can go and view the media that they've uploaded. If 
 
 Video
 ```
-tachitnow.com/#link/lego
+tachitnow.com/lego
 ```
 
 Voice
 ```
-tachitnow.com/#link/al
+tachitnow.com/al
 ```
 
 Picture
 ```
-tachitnow.com/#link/ups
+tachitnow.com/ups
 ```
 
 ##Development
