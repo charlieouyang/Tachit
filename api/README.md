@@ -30,22 +30,25 @@ This API is build using nodeJS, and express. It utilizes sequelize to communicat
 Links found response: 
 ```
 {
+    "message": "Links found!",
+    "links_found": "2",
+    "link_url": "1610131002312",
     "result": [
         {
-            "id": 2,
-            "link_url": "al",
-            "amazon_key": "charlieouyang/1426312628404-charlieouyang.mp3",
-            "name": "Scarface",
-            "description": "Al Pacino's words of wisdom",
-            "media_type": "voice",
-            "user_name": "charlieouyang",
-            "createdAt": "2015-03-14T05:57:08.000Z",
-            "updatedAt":"2015-03-14T05:57:08.000Z"
+            "presignedGetURL": "https://s3.amazonaws.com/www.linkprototype.com/charlieouyang/a9f26e0a129d4407d8a393a82b066d05.png?AWSAccessKeyId=AKIAJZUXHNLLC3H7H4AA&Expires=1428085648&Signature=W%2Fl%2B476KQDFK0MHtRJz7kGDo07U%3D",
+            "name": "Amazon delivery south park 1",
+            "description": "hello there mr ups man amazon 1",
+            "media_type": "picture",
+            "user_name": "charlieouyang"
+        },
+        {
+            "presignedGetURL": "https://s3.amazonaws.com/www.linkprototype.com/charlieouyang/444e645aeb82959ff51f09ba0e0118bb.png?AWSAccessKeyId=AKIAJZUXHNLLC3H7H4AA&Expires=1428085648&Signature=W1C36hIkLBwiBeiYvHWQoIlcLXk%3D",
+            "name": "Amazon delivery south park 2",
+            "description": "hello there mr ups man amazon 2",
+            "media_type": "picture",
+            "user_name": "charlieouyang"
         }
-    ],
-    "message": "Found 1 link",
-    "links_found": 1,
-    "presignedGetURL":"https://s3.amazonaws.com/www.linkprototype.com/charlieouyang/1426312628404-charlieouyang.mp3?AWSAccessKeyId=AKIAJZUXHNLLC3H7H4AA&Expires=1426366647&Signature=rlAlL5b%2F7tMa44HlrdKEqnXK224%3D"
+    ]
 }
 ```
 
@@ -68,11 +71,21 @@ Links not found response
 
 ```
 {
-    "link_url": "test",
-    "name": "Amazon delivery south park",
-    "description": "hello there mr ups man amazon",
-    "media_type": "picture",
-    "user_name": "charlieouyang"
+    "link_url": "6101100312",
+    "data": [
+        {
+            "name": "Amazon delivery south park 1",
+            "description": "hello there mr ups man amazon 1",
+            "media_type": "picture",
+            "user_name": "charlieouyang"
+        },
+        {
+            "name": "Amazon delivery south park 2",
+            "description": "hello there mr ups man amazon 2",
+            "media_type": "picture",
+            "user_name": "charlieouyang"
+        }
+    ]
 }
 ```
 
@@ -81,11 +94,23 @@ Links not found response
 Link post success response: 
 ```
 {
-    link_url: "test",
-    name: "Amazon delivery south park",
-    description: "hello there mr ups man amazon",
-    media_type: "picture",
-    presignedUploadURL: "https://s3.amazonaws.com/www.linkprototype.com/charlieouyang/1426366300859-charlieouyang.png?AWSAccessKeyId=AKIAJZUXHNLLC3H7H4AA&Expires=1426367200&Signature=h5HozVnpEdtW%2F3jzYFoNXeK8h2I%3D"
+    "link_url": "6101100312",
+    "result": [
+        {
+            "presignedUploadURL": "https://s3.amazonaws.com/www.linkprototype.com/charlieouyang/a9f26e0a129d4407d8a393a82b066d05.png?AWSAccessKeyId=AKIAJZUXHNLLC3H7H4AA&Expires=1428087019&Signature=xpgEQO4xCXbv27m0V5bEQh1m%2BAY%3D",
+            "name": "Amazon delivery south park 1",
+            "description": "hello there mr ups man amazon 1",
+            "media_type": "picture",
+            "user_name": "charlieouyang"
+        },
+        {
+            "presignedUploadURL": "https://s3.amazonaws.com/www.linkprototype.com/charlieouyang/444e645aeb82959ff51f09ba0e0118bb.png?AWSAccessKeyId=AKIAJZUXHNLLC3H7H4AA&Expires=1428087019&Signature=VThY%2BTt%2FKRnHxDJAMi5hAqndK4w%3D",
+            "name": "Amazon delivery south park 2",
+            "description": "hello there mr ups man amazon 2",
+            "media_type": "picture",
+            "user_name": "charlieouyang"
+        }
+    ]
 }
 ```
 
@@ -93,21 +118,32 @@ Link exists already (HTTP Error Code 409) response
 
 ```
 {
-    result: [
+    "result": [
         {
-            id: 4,
-            link_url: "test",
-            amazon_key: "charlieouyang/1426366300859-charlieouyang.png",
-            name: "Amazon delivery south park",
-            description: "hello there mr ups man amazon",
-            media_type: "picture",
-            user_name: "charlieouyang",
-            createdAt: "2015-03-14T20:51:40.000Z",
-            updatedAt: "2015-03-14T20:51:40.000Z"
+            "id": 22,
+            "link_url": "6101100322312",
+            "amazon_key": "charlieouyang/a9f26e0a129d4407d8a393a82b066d05.png",
+            "name": "Amazon delivery south park 1",
+            "description": "hello there mr ups man amazon 1",
+            "media_type": "picture",
+            "user_name": "charlieouyang",
+            "createdAt": "2015-04-03T18:35:19.000Z",
+            "updatedAt": "2015-04-03T18:35:19.000Z"
+        },
+        {
+            "id": 23,
+            "link_url": "6101100322312",
+            "amazon_key": "charlieouyang/444e645aeb82959ff51f09ba0e0118bb.png",
+            "name": "Amazon delivery south park 2",
+            "description": "hello there mr ups man amazon 2",
+            "media_type": "picture",
+            "user_name": "charlieouyang",
+            "createdAt": "2015-04-03T18:35:19.000Z",
+            "updatedAt": "2015-04-03T18:35:19.000Z"
         }
     ],
-    message: "Link already exists",
-    links_found: 1
+    "message": "Link already exists",
+    "links_found": 2
 }
 ```
 
