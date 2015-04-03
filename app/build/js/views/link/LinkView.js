@@ -4,8 +4,9 @@ define([
   'backbone',
   'Mustache',
   'text!templates/link/linkTemplate.html',
+  'collections/links/LinksCollection',
   'models/link/LinkModel'
-], function($, _, Backbone, Mustache, linkTemplate, LinkModel){
+], function($, _, Backbone, Mustache, linkTemplate, LinkCollection, LinkModel){
 
   var LinkView = Backbone.View.extend({
     el: $("#content"),
@@ -21,38 +22,40 @@ define([
       }
 
       linkUrl = args.linkUrl;
-      model = new LinkModel({
-        link_url: linkUrl
+
+      collection = new LinkCollection({
+        linkUrl: linkUrl
       });
 
-      model.fetch({
-        success: function (link) {
-          if (link.get("link_exist")) {
+      collection.fetch({
+        success: function (links) {
+          var result = {},
+              data;
 
-            data = link.toJSON();
-            if (link.get("media_type") === "video") {
+          result.data = [];
+          result.link_exist = links.length > 0;
+
+          links.each(function (model){
+            data = {};
+            if (model.get("media_type") === "video") {
               data.video = true;
-            } else if (link.get("media_type") === "picture") {
+            } else if (model.get("media_type") === "picture") {
               data.picture = true;
-            } else if (link.get("media_type") === "voice") {
+            } else if (model.get("media_type") === "voice") {
               data.voice = true;
-            } else if (link.get("media_type") === "text") {
+            } else if (model.get("media_type") === "text") {
               data.text = true;
             }
-          } else {
-            //Link doesn't exist
-          }
+            result.data.push($.extend(model.toJSON(), data));
+          });
 
-          rendered = Mustache.to_html(linkTemplate, data);
+          rendered = Mustache.to_html(linkTemplate, result);
           self.$el.html(rendered);
         },
         error: function (err) {
           console.log("Error on fetch...");
         }
       });
-
-      //rendered = Mustache.to_html(linkTemplate, {"video": true});
-      //this.$el.html(rendered);
     }
   });
 
