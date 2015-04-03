@@ -64,11 +64,13 @@ module.exports = function (router) {
                                 return callback(err);
                             }
                             callback(null, {
+                                "id": link.dataValues.id,
                                 "presignedGetURL": url,
                                 "name": link.dataValues.name,
                                 "description": link.dataValues.description,
                                 "media_type": link.dataValues.media_type,
-                                "user_name": link.dataValues.user_name
+                                "user_name": link.dataValues.user_name,
+                                "created_at": link.dataValues.createdAt
                             });
                         });
                     });

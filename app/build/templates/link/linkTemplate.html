@@ -2,37 +2,44 @@
 	<h2>Link</h2>
 
     {{#link_exist}}
-        <p>Tachit Name: {{name}}</p>
-        <p>Media Type: {{media_type}}</p>
-        <p>Description: {{description}}</p>
-        <p>Created at: {{created_at}}</p>
-        <p>Media ID: {{id}}</p>
-        <p>Link URL: {{link_url}}</p>
-        <p>User Name: {{user_name}}</p>
+        {{#data}}
 
-        {{#video}}
-            <h3>Video</h3>
-            <video controls>
-              <source src="{{presignedGetUrl}}" type="video/mp4">
-            </video>
-        {{/video}}
+            <p>Tachit Name: {{name}}</p>
+            <p>Media Type: {{media_type}}</p>
+            <p>Description: {{description}}</p>
+            <p>Created at: {{created_at}}</p>
+            <p>Media ID: {{id}}</p>
+            <p>User Name: {{user_name}}</p>
 
-        {{#picture}}
-            <h3>Picture</h3>
-            <img src="{{presignedGetUrl}}" />
-        {{/picture}}
+            {{#video}}
+                <h3>Video</h3>
+                <video controls>
+                  <source src="{{presignedGetURL}}" type="video/mp4">
+                </video>
+                <br><br><br><br>
+            {{/video}}
 
-        {{#voice}}
-            <h3>Voice</h3>
-            <audio controls>
-              <source src="{{presignedGetUrl}}" type="audio/mpeg">
-            </audio>
-        {{/voice}}
+            {{#picture}}
+                <h3>Picture</h3>
+                <img src="{{presignedGetURL}}" />
+                <br><br><br><br>
+            {{/picture}}
 
-        {{#text}}
-            <h3>Text</h3>
-            <p>This is dummy text!</p>
-        {{/text}}
+            {{#voice}}
+                <h3>Voice</h3>
+                <audio controls>
+                  <source src="{{presignedGetURL}}" type="audio/mpeg">
+                </audio>
+                <br><br><br><br>
+            {{/voice}}
+
+            {{#text}}
+                <h3>Text</h3>
+                <p>This is dummy text!</p>
+                <br><br><br><br>
+            {{/text}}
+
+        {{/data}}
 
     {{/link_exist}}
 
