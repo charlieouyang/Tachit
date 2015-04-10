@@ -1,15 +1,10 @@
 <div class="main">	
-	<h2>Link</h2>
+	<h1>Link Page</h1>
 
     {{#link_exist}}
+    <div class="container">
         {{#data}}
-
-            <p>Tachit Name: {{name}}</p>
-            <p>Media Type: {{media_type}}</p>
-            <p>Description: {{description}}</p>
-            <p>Created at: {{created_at}}</p>
-            <p>Media ID: {{id}}</p>
-            <p>User Name: {{user_name}}</p>
+        <div class="row linkRow">
 
             {{#video}}
                 <h3>Video</h3>
@@ -20,9 +15,19 @@
             {{/video}}
 
             {{#picture}}
-                <h3>Picture</h3>
-                <img src="{{presignedGetURL}}" />
-                <br><br><br><br>
+                <div class="row-same-height row-full-height">
+                    <div class="col-md-5 col-lg-height col-full-height">
+                        <div class="imageContainer">
+                            <img src="{{presignedGetURL}}" />
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-height col-full-height">
+                        <div class="description">
+                            <h2>{{name}}</h2>
+                            <p class="lead">{{description}}</p>
+                        </div>
+                    </div>
+                </div>
             {{/picture}}
 
             {{#voice}}
@@ -38,9 +43,9 @@
                 <p>This is dummy text!</p>
                 <br><br><br><br>
             {{/text}}
-
+        </div>
         {{/data}}
-
+    </div>
     {{/link_exist}}
 
     {{^link_exist}}

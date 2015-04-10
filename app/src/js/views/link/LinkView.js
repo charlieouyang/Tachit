@@ -51,6 +51,7 @@ define([
 
           rendered = Mustache.to_html(linkTemplate, result);
           self.$el.html(rendered);
+
         },
         error: function (err) {
           console.log("Error on fetch...");

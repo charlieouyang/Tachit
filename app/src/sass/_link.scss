@@ -1,0 +1,32 @@
+.linkRow {
+    padding: 20px;
+}
+
+.imageContainer {
+    img {
+        width: 100%;
+    }
+}
+
+.row-full-height {
+  height: 100%;
+}
+
+.col-full-height {
+  height: 100%;
+  vertical-align: middle;
+}
+
+.row-same-height {
+  display: table;
+  width: 100%;
+  /* fix overflow */
+  table-layout: fixed;
+}
+
+@media (min-width: 1200px) {
+  .col-lg-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
