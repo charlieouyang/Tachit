@@ -7,17 +7,27 @@
         <div class="row linkRow">
 
             {{#video}}
-                <h3>Video</h3>
-                <video controls>
-                  <source src="{{presignedGetURL}}" type="video/mp4">
-                </video>
-                <br><br><br><br>
+                <div class="row-same-height row-full-height">
+                    <div class="col-md-5 col-lg-height col-full-height">
+                        <div class="mediaContainer">
+                            <video controls>
+                                <source src="{{presignedGetURL}}" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-height col-full-height">
+                        <div class="description">
+                            <h2>{{name}}</h2>
+                            <p class="lead">{{description}}</p>
+                        </div>
+                    </div>
+                </div>
             {{/video}}
 
             {{#picture}}
                 <div class="row-same-height row-full-height">
                     <div class="col-md-5 col-lg-height col-full-height">
-                        <div class="imageContainer">
+                        <div class="mediaContainer">
                             <img src="{{presignedGetURL}}" />
                         </div>
                     </div>
@@ -31,11 +41,21 @@
             {{/picture}}
 
             {{#voice}}
-                <h3>Voice</h3>
-                <audio controls>
-                  <source src="{{presignedGetURL}}" type="audio/mpeg">
-                </audio>
-                <br><br><br><br>
+                <div class="row-same-height row-full-height">
+                    <div class="col-md-5 col-lg-height col-full-height">
+                        <div class="mediaContainer">
+                            <audio controls>
+                                <source src="{{presignedGetURL}}" type="audio/mpeg">
+                            </audio>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-lg-height col-full-height">
+                        <div class="description">
+                            <h2>{{name}}</h2>
+                            <p class="lead">{{description}}</p>
+                        </div>
+                    </div>
+                </div>
             {{/voice}}
 
             {{#text}}
