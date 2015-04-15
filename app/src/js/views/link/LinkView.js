@@ -4,9 +4,8 @@ define([
   'backbone',
   'Mustache',
   'text!templates/link/linkTemplate.html',
-  'collections/links/LinksCollection',
-  'models/link/LinkModel'
-], function($, _, Backbone, Mustache, linkTemplate, LinkCollection, LinkModel){
+  'collections/LinksCollection'
+], function($, _, Backbone, Mustache, linkTemplate, LinkCollection){
 
   var LinkView = Backbone.View.extend({
     el: $("#content"),

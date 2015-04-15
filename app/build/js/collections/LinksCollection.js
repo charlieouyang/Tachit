@@ -1,8 +1,8 @@
 define([
   'underscore',
   'backbone',
-  'models/link/LinkModel',
-  'text!../../../config/config.json'
+  'models/LinkModel',
+  'text!../../config/config.json'
 ], function(_, Backbone, LinkModel, appConfig){
 
   var LinksCollection = Backbone.Collection.extend({

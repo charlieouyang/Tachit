@@ -1,8 +1,7 @@
 define([
   'underscore',
-  'backbone',
-  'text!../../../config/config.json'
-], function(_, Backbone, appConfig) {
+  'backbone'
+], function(_, Backbone) {
   
   var LinkModel = Backbone.Model.extend({
     urlRoot: '/link',

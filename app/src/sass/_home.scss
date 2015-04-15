@@ -1,5 +1,5 @@
 $font-stack: Helvetica, sans-serif;
-$default-font-size: 1.5vh;
+$default-font-size: 15px;
 body{
 	font-family: $font-stack;
 }
@@ -23,7 +23,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc370', end
   left:0;
   z-index: -1;
   background-size : cover;
-}
+} 
 
 .jumbotron {
   height: 350px;
@@ -139,5 +139,31 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc370', end
 @media (min-width: 992px) {
   .featurette-heading {
     margin-top: 120px;
+  }
+}
+
+/* Popover stylings for the email submission
+-------------------------------------------------- */
+.email-error {
+  .popover {
+    background: #b92c28;
+  }
+  .popover.top .arrow:after {
+    border-top-color: #b92c28;
+  }
+  .popover-content {
+    color: white;
+  }
+}
+
+.email-success {
+  .popover {
+    background: #5cb85c;
+  }
+  .popover.top .arrow:after {
+    border-top-color: #5cb85c;
+  }
+  .popover-content {
+    color: white;
   }
 }
