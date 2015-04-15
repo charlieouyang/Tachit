@@ -198,11 +198,37 @@ tachitnow.com/api/click/IOS_App_Link
 
 **Response** 
 
-Link post success response: 
+Click post success response: 
 
 ```
 {
     click_placement: "IOS_App_Link",
     message: "Click recorded!"
+}
+```
+
+
+###Post Email to API
+
+**URL** - tachitnow.com/api/email
+
+**Request Type** - POST
+
+**Request Payload** - content type must be ```application/json```
+
+```
+{
+    "email_address": "abcde@hotmail.com"
+}
+```
+
+**Response** 
+
+Email post success response: 
+
+```
+{
+    email_address: "abcde@hotmail.com"
+    message: "Email recorded!"
 }
 ```
