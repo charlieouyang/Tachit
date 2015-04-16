@@ -3,20 +3,41 @@ define([
   'underscore',
   'backbone',
   'models/EmailModel',
+  'models/ClickModel',
   'text!templates/home/homeTemplate.html'
-], function($, _, Backbone, EmailModel, homeTemplate){
+], function($, _, Backbone, EmailModel, ClickModel, homeTemplate){
 
   var HomeView = Backbone.View.extend({
     el: $("#content"),
 
     events: {
-      "click .email-submit-button": "submitEmailClick"
+      "click .email-submit-button": "submitEmailClick",
+      "click .placement-click": "clickPlacementSubmit"
     },
 
     render: function(){
       var self = this;
 
       this.$el.html(homeTemplate);
+    },
+
+    clickPlacementSubmit: function (e) {
+      var self = this,
+          cmodel,
+          clickPlacement = e.target.getAttribute("button-data");
+
+      if (clickPlacement) {
+        $.get("http://ipinfo.io", function(response) {
+          cmodel = new ClickModel({
+            click_placement: clickPlacement,
+            country: response.country,
+            region: response.region,
+            city: response.city,
+            zip_code: response.postal
+          });
+          cmodel.save();
+        }, "jsonp");
+      }
     },
 
     submitEmailClick: function (e) {

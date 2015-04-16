@@ -6,6 +6,18 @@ module.exports = function(sequelize, DataTypes) {
             click_placement: {
                 type: DataTypes.TEXT
             },
+            city: {
+                type: DataTypes.TEXT
+            },
+            region: {
+                type: DataTypes.TEXT
+            },
+            country: {
+                type: DataTypes.TEXT
+            },
+            zip_code: {
+                type: DataTypes.TEXT
+            },
             createdAt: {type: DataTypes.DATE, defaultValue: DataTypes.NOW}
         });
 
