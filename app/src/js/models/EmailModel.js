@@ -4,7 +4,7 @@ define([
   'text!../../config/config.json'
 ], function(_, Backbone, appConfig) {
   
-  var LinkModel = Backbone.Model.extend({
+  var EmailModel = Backbone.Model.extend({
 
     initialize: function (options) {
       this.appConfig = JSON.parse(appConfig);
@@ -16,5 +16,5 @@ define([
     }
   });
 
-  return LinkModel;
+  return EmailModel;
 });

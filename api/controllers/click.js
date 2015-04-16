@@ -10,6 +10,10 @@ module.exports = function (router) {
         Click = db.Click,
         availableFields = {
             'click_placement': 'click_placement',
+            'country': 'country',
+            'region': 'region',
+            'city': 'city',
+            'zip_code': 'zip_code',
             'created_at': 'created_at'
         };
 
@@ -57,7 +61,11 @@ module.exports = function (router) {
     router.post('/click', function(req, res) {
         var data = req.body,
             acceptedField = {
-                'click_placement': 'click_placement'
+                'click_placement': 'click_placement',
+                'country': 'country',
+                'region': 'region',
+                'city': 'city',
+                'zip_code': 'zip_code'
             },
             valid = {};
 
