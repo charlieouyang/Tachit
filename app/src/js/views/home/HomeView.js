@@ -19,25 +19,40 @@ define([
       var self = this;
 
       this.$el.html(homeTemplate);
+
+      //Let's register as soon as someone hits the main page
+      self.clickPlacementSubmit();
     },
 
     clickPlacementSubmit: function (e) {
       var self = this,
           cmodel,
-          clickPlacement = e.target.getAttribute("button-data");
+          clickPlacement;
 
-      if (clickPlacement) {
-        $.get("http://ipinfo.io", function(response) {
-          cmodel = new ClickModel({
-            click_placement: clickPlacement,
-            country: response.country,
-            region: response.region,
-            city: response.city,
-            zip_code: response.postal
-          });
-          cmodel.save();
-        }, "jsonp");
+      if (e) {
+        clickPlacement = e.target.getAttribute("button-data");
       }
+
+      $.when(self.getLocation()).done(function (response){
+        cmodel = new ClickModel({
+          click_placement: clickPlacement ? clickPlacement : "home-page-load",
+          country: response.country,
+          region: response.region,
+          city: response.city,
+          zip_code: response.postal
+        });
+        cmodel.save();
+      });
+    },
+
+    getLocation: function(){
+      var deferred = $.Deferred();
+
+      $.get("http://ipinfo.io", function(response) {
+          deferred.resolve(response);
+        }, "jsonp");
+
+      return deferred.promise();
     },
 
     submitEmailClick: function (e) {
