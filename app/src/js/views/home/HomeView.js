@@ -12,6 +12,8 @@ define([
 
     events: {
       "click .email-submit-button": "submitEmailClick",
+
+      //This is the registered event handler for all clicks in the landing page
       "click .placement-click": "clickPlacementSubmit"
     },
 

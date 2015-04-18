@@ -13,6 +13,14 @@ tachitnow.com
 
 This is the main page of the web app. The Tachit landing page should live here. Currently contains a string to indicate that it's the landing page.
 
+**Location Tracking**
+
+This landing page has location logging enabled. As soon as the user navigates to the landing page, a request is made for location and posted to the API.
+
+**Click Placement Tracking**
+
+Each click on any html element for example ```<div>``` just so as long as you add the class ```placement-click``` and this attribute ```button-data="timeless-view-details"``` where the value is anything you want to represent the element clicked. The location of the user will also be registered along with the click.
+
 ###View Link
 
 **URL** 
