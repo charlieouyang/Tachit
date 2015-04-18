@@ -165,15 +165,23 @@ tachitnow.com/api/click/IOS_App_Link
 {
     result: [
     {
-        id: 7
-        click_placement: "IOS_App_Link"
-        createdAt: "2015-03-23T21:06:39.000Z"
+        id: 7,
+        click_placement: "IOS_App_Link",
+        city: "New York",
+        region: "New York",
+        country: "US",
+        zip_code: "10016",
+        createdAt: "2015-03-23T21:06:39.000Z",
         updatedAt: "2015-03-23T21:06:39.000Z"
     },
     {
-        id: 8
-        click_placement: "IOS_App_Link"
-        createdAt: "2015-03-23T21:07:02.000Z"
+        id: 8,
+        click_placement: "IOS_App_Link",
+        city: "New York",
+        region: "New York",
+        country: "US",
+        zip_code: "10016",
+        createdAt: "2015-03-23T21:07:02.000Z",
         updatedAt: "2015-03-23T21:07:02.000Z"
     }],
     message: "Clicks found!",
@@ -192,7 +200,11 @@ tachitnow.com/api/click/IOS_App_Link
 
 ```
 {
-    "click_placement": "IOS_App_Link"
+    "country": "United States",
+    "region": "New York",
+    "city": "New York",
+    "zip_code": "10018",
+    "click_placement": "home-page-load"
 }
 ```
 
@@ -202,7 +214,11 @@ Click post success response:
 
 ```
 {
-    click_placement: "IOS_App_Link",
+    "country": "United States",
+    "region": "New York",
+    "city": "New York",
+    "zip_code": "10018",
+    "click_placement": "home-page-load",
     message: "Click recorded!"
 }
 ```
