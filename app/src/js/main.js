@@ -5,12 +5,33 @@
 // Their usage will become more apparent futher along in the tutorial.
 require.config({
   paths: {
-    jquery: 'libs/jquery/jquery-min',
+    jQuery: 'libs/jquery/jquery-min',
+    jQPlugins: 'libs/jquery/plugins',
     underscore: 'libs/underscore/underscore-min',
     backbone: 'libs/backbone/backbone-min',
     templates: '../templates',
-    Mustache: 'libs/mustache/mustache.min'
-  }
+    Mustache: 'libs/mustache/mustache.min',
+  },
+
+  shim: {
+        jQuery: {
+            attach: "$",
+            exports: "jQuery"
+        },
+        Backbone: {
+            exports: "Backbone"
+        },
+        Underscore: {
+            deps: ["jQuery"],
+            exports: "_"
+        },
+        "backbone-relational": {
+            deps: ['Backbone']
+        },
+        "jQPlugins/jquery.fullPage": {
+            deps: ["jQuery"]
+        }
+    }
 
 });
 
