@@ -6,8 +6,9 @@ define([
   'views/home/HomeView',
   'views/link/LinkView',
   'views/navigation/NavigationView',
-  'views/footer/FooterView'
-], function($, _, Backbone, HomeView, LinkView, NavView, FooterView) {
+  'views/footer/FooterView',
+  'views/error/404View'
+], function($, _, Backbone, HomeView, LinkView, NavView, FooterView, error404View) {
   
   var AppRouter = Backbone.Router.extend({
     routes: {
@@ -50,12 +51,14 @@ define([
         linkView.render({
           linkUrl: id
         });
-        console.log("Hit ID page: :id");
     });
 
     app_router.on('route:undefinedRoutes', function (actions) {
        // We have no matching route, lets display the home page 
-        console.log("Hit 404 page");
+        var errorView = new error404View();
+        errorView.render({
+          action: actions
+        });
     });
 
     Backbone.history.start({pushState: true, root: '/'});

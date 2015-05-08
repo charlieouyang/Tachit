@@ -5,13 +5,10 @@
   right: 0;
   left: 0;
   z-index: 20;
-}
-.nav>li>a:focus, .nav>li>a:hover {
-  background-color: rgba(0,0,0,0);
-}
 
-.nav li a{
-	color:white;
+  .icon-bar {
+    background-color: white;
+  }
 }
 /* RESPONSIVE CSS
 -------------------------------------------------- */
@@ -33,5 +30,44 @@
   /* The navbar becomes detached from the top, so we round the corners */
   .navbar-wrapper .navbar {
     border-radius: 4px;
+  }
+}
+
+.navbar-nav {
+  li {
+    padding-right: 25px;
+    padding-top: 5px;
+  }
+
+  .twitter {
+    width: 45px;
+    height: 45px;
+    background: url(../imgs/sprite.png);
+    background-position: 0px 0px;
+    background-size: 685% 100%;
+  }
+
+  .facebook {
+    width: 45px;
+    height: 45px;
+    background: url(../imgs/sprite.png);
+    background-position: 250px 0px;
+    background-size: 685% 100%;
+  }
+
+  .instagram {
+    width: 45px;
+    height: 45px;
+    background: url(../imgs/sprite.png);
+    background-position: 189px 0px;
+    background-size: 685% 100%;
+  }
+
+  .menu {
+    width: 111px;
+    height: 45px;
+    background: url(../imgs/sprite.png);
+    background-position: 112px 0px;
+    background-size: 275% 100%;
   }
 }

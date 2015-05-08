@@ -33,6 +33,7 @@ define([
 
           result.data = [];
           result.link_exist = links.length > 0;
+          result.linkUrl = linkUrl;
 
           links.each(function (model){
             data = {};
