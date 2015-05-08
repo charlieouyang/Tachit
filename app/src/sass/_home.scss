@@ -31,6 +31,15 @@ body{
 .landing-page-content {
     width: 100% !important;
     background: white;
+
+    .tachit-steps-container {
+      width: 100%;
+
+      .tachit-steps-img {
+        display: table;
+        margin: 0 auto;
+      }
+    }
 }
 
 /* CUSTOMIZE THE CAROUSEL
