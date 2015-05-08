@@ -69,6 +69,20 @@
     {{/link_exist}}
 
     {{^link_exist}}
-        <p>The link doesn't exist!</p>
+        <div class="row linkRow">
+            <div class="row-same-height row-full-height">
+                <div class="col-md-5 col-lg-height col-full-height">
+                    <div class="mediaContainer">
+                        <img src="http://uhoh.com/example.jpg" />
+                    </div>
+                </div>                    
+                <div class="col-md-7 col-lg-height col-full-height">
+                    <div class="description">
+                        <h2>Uh oh! Link doesn't exist!</h2>
+                        <p class="lead">This {{linkUrl}} link doesn't have any media attached to it yet. Please follow instructions on the home page to attach media to this link!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     {{/link_exist}}
 </div>

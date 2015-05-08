@@ -76,8 +76,6 @@ module.exports = function (router) {
             }
         }
 
-        console.log("valid JSON: %j", valid);
-
         Click.create(valid).then(function(click) {
             var dict = {};
 
@@ -87,7 +85,7 @@ module.exports = function (router) {
                 }
             }
 
-            dict.message = "Click recorded!";
+            dict.message = "Click registered!";
             res.statusCode = 201;
             res.json(dict);
 

@@ -4,41 +4,25 @@ body{
 	font-family: $font-stack;
 }
 
-.bg {
-  /* background: url('/imgs/bg_blueplane.jpg') no-repeat center center; */
- background: #ffc370; /* Old browsers */
-background: -moz-linear-gradient(top,  #ffc370 1%, #ff912b 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#ffc370), color-stop(100%,#ff912b)); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  #ffc370 1%,#ff912b 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  #ffc370 1%,#ff912b 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  #ffc370 1%,#ff912b 100%); /* IE10+ */
-background: linear-gradient(to bottom,  #ffc370 1%,#ff912b 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc370', endColorstr='#ff912b',GradientType=0 ); /* IE6-9 */
+.main-jumbotron {
+  height:100%;
+  background: -webkit-linear-gradient(left, #ec008c , #fbb040); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #ec008c, #fbb040); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #ec008c, #fbb040); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #ec008c , #fbb040); /* Standard syntax (must be last) */
+  background-size: cover;
 
+  .banner-container {
+      width: 250px;
 
-  position: fixed;
-  width: 100%;
-  height: 350px; /*same height as jumbotron */
-  top:0;
-  left:0;
-  z-index: -1;
-  background-size : cover;
-} 
-
-.jumbotron {
-  height: 350px;
-  color: black;
-  text-shadow: #444 0 1px 1px;
-  background: none !important;
-  padding: 80px 15px !important;
+    .tachit-logo-banner {
+      float: left;
+      width: 100%;
+      background-repeat: no-repeat;
+    }
+  }
 }
 
-.jumbo-text-container{
-	color: white;
-}
-.jumbotronwidth {
-    max-width:100%;
-}
 
 .landing-page-content {
     width: 100% !important;
