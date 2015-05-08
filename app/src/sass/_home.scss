@@ -5,20 +5,24 @@ body{
 }
 
 .main-jumbotron {
-  height:100%;
+  height: 100%;
   background: -webkit-linear-gradient(left, #ec008c , #fbb040); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(right, #ec008c, #fbb040); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(right, #ec008c, #fbb040); /* For Firefox 3.6 to 15 */
   background: linear-gradient(to right, #ec008c , #fbb040); /* Standard syntax (must be last) */
   background-size: cover;
 
-  .banner-container {
+  .banner-row {
+    padding: 75px;
+
+    .banner-container {
       width: 250px;
 
-    .tachit-logo-banner {
-      float: left;
-      width: 100%;
-      background-repeat: no-repeat;
+      .tachit-logo-banner {
+        float: left;
+        width: 100%;
+        background-repeat: no-repeat;
+      }
     }
   }
 }
