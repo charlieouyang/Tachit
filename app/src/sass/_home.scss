@@ -27,6 +27,34 @@ body{
   }
 }
 
+.how-it-works {
+  div {
+    text-align: center;
+    position: relative;
+    height: 45px;
+  }
+  span {
+    display: inline-block;
+    font-family: arial;
+    font-size: xx-large;
+  }
+  span:before,
+  span:after {
+    border-top: 1px solid lightgray;
+    display: block;
+    height: 21px;
+    content: " ";
+    width: 38%;
+    position: absolute;
+    left: 0;
+    top: 20px;
+  }
+  span:after {
+     right: 0;  
+     left: auto; 
+  }
+}
+
 
 .landing-page-content {
     width: 100% !important;
