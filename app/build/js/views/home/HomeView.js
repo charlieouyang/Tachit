@@ -93,7 +93,7 @@ define([
 
         var height = $(self.el).find(".section").height();
         $.each($(self.el).find(".tachit-steps-img"), function(index, value){
-          value.height = height - 45 - 75;
+          value.height = height;
         });
 
       }, 500);
