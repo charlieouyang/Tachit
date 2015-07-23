@@ -63,8 +63,7 @@ body{
     height: 80vh;
 
     .image {
-      height: 100%;
-      width: auto;
+      max-height: 100%;
     }
   }
 }
