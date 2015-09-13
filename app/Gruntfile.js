@@ -54,7 +54,7 @@ module.exports = function (grunt) {
 					{
 						expand : true,
 						cwd : 'src/css/',
-						src : ['font-awesome.min.css'],
+						src : ['font-awesome.min.css','ekko-lightbox.min.css'],
 						dest : 'build/css/'
 					}, {
 						expand : true,
