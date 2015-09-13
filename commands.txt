@@ -1,0 +1,26 @@
+MySQL 
+
+starting the server
+sudo /usr/local/mysql/support-files/mysql.server start
+
+accessing the server
+mysql --user=root --password=root
+
+
+Digital Ocean Server
+
+sshing
+ssh -i ~/.ssh/id_rsa  root@104.131.98.161
+
+
+API commands
+
+starting the NodeJS Server
+node server.js
+
+
+APP commands
+
+starting the web server
+grunt
+
