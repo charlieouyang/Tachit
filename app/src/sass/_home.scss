@@ -176,6 +176,12 @@ body{
 
 /* Popover stylings for the email submission
 -------------------------------------------------- */
+.email-container {
+  h4 {
+    text-align: center;
+  }
+}
+
 .email-error {
   .popover {
     background: #b92c28;

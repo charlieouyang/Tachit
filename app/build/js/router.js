@@ -3,12 +3,12 @@ define([
   'jquery',
   'underscore',
   'backbone',
+  'views/header/HeaderView',
   'views/home/HomeView',
   'views/link/LinkView',
-  'views/navigation/NavigationView',
   'views/footer/FooterView',
   'views/error/404View'
-], function($, _, Backbone, HomeView, LinkView, NavView, FooterView, error404View) {
+], function($, _, Backbone, HeaderView, HomeView, LinkView, FooterView, error404View) {
   
   var AppRouter = Backbone.Router.extend({
     routes: {
@@ -34,10 +34,10 @@ define([
 
     app_router.on('route:homePage', function (id) {
         console.log("Hit home page: /");
-        var navView = new NavView();
         var footerView = new FooterView();
+        var headerView = new HeaderView();
         var homeView = new HomeView();
-        navView.render();
+        headerView.render();
         footerView.render();
         homeView.render();
     });
@@ -47,7 +47,11 @@ define([
     });
 
     app_router.on('route:linkPage', function (id) {
+        var footerView = new FooterView();
+        var headerView = new HeaderView();
         var linkView = new LinkView();
+        headerView.render();
+        footerView.render();
         linkView.render({
           linkUrl: id
         });

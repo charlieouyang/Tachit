@@ -1,8 +1,37 @@
-<div class="main">	
-	<h1>Link Page</h1>
-
+<div class="main link-body">	
     {{#link_exist}}
     <div class="container">
+        {{#data}}
+        <div class="row">
+            {{#picture}}
+            <div class="col-lg-4 col-md-4 .col-xs-12 col-lg-height">
+                {{#column1}}
+                <div class="mediaContainer" id="{{id}}" media-type="{{media_type}}">
+                    <a href="{{presignedGetURL}}" data-toggle="lightbox" data-gallery="media" data-title="{{name}}" data-footer="{{description}}">
+                        <img src="{{presignedGetURL}}" />
+                    </a>
+                </div>
+                {{/column1}}
+            </div>
+
+            <div class="col-md-4 col-lg-height">
+                {{#column2}}
+                <div class="mediaContainer" id="{{id}}" media-type="{{media_type}}">
+                    <a href="{{presignedGetURL}}" data-toggle="lightbox" data-gallery="media" data-title="{{name}}" data-footer="{{description}}">
+                        <img src="{{presignedGetURL}}" />
+                    </a>
+                </div>
+                {{/column2}}
+            </div>
+
+            {{/picture}}
+        </div>
+
+        {{/data}}
+
+
+
+<!-- 
         {{#data}}
         <div class="row linkRow">
 
@@ -64,7 +93,9 @@
                 <br><br><br><br>
             {{/text}}
         </div>
-        {{/data}}
+        {{/data}} -->
+
+
     </div>
     {{/link_exist}}
 
