@@ -24,3 +24,7 @@ APP commands
 starting the web server
 grunt
 
+
+Upload to S3
+
+curl --upload-file 23.png "https://s3.amazonaws.com/www.linkprototype.com/charlieouyang/536f4d5b620ff00a760557ec204af05d.png?AWSAccessKeyId=AKIAJZUXHNLLC3H7H4AA&Expires=1442170909&Signature=YzjdUoPgk4wYm2sPz6KLXZz79r4%3D"
