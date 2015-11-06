@@ -6,7 +6,10 @@ module.exports = function(sequelize, DataTypes) {
             link_url: {
                 type: DataTypes.TEXT
             },
-            amazon_key: {
+            amazon_key_actual: {
+                type: DataTypes.TEXT
+            },
+            amazon_key_preview: {
                 type: DataTypes.TEXT
             },
             name: {
@@ -19,6 +22,18 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.TEXT
             },
             user_name: {
+                type: DataTypes.TEXT
+            },
+            uniquefilename: {
+                type: DataTypes.TEXT
+            },
+            uniqueactualfilename: {
+                type: DataTypes.TEXT
+            },
+            fieldfilename: {
+                type: DataTypes.TEXT
+            },
+            final: {
                 type: DataTypes.TEXT
             },
             createdAt: {type: DataTypes.DATE, defaultValue: DataTypes.NOW}
