@@ -14,6 +14,9 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+//Serve the /uploads directory as public
+app.use('/uploads', express.static(__dirname + '/uploads'));
+
 var router = express.Router();
 controllers(router);
 app.use('/api', router);

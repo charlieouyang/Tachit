@@ -18,6 +18,10 @@
             "picture": ".png",
             "voice": ".mp3",
             "text": ".txt"
-        }
+        },
+        "storage": {
+            "uploadDirectoryName": "uploads"
+        },
+        "hostName": "http://localhost:6080/"
     }
 }
