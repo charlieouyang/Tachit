@@ -56,6 +56,15 @@ module.exports = function (router) {
         uploadDirectoryName = require('../config/config.json')["default"]["storage"].uploadDirectoryName,
         hostName = require('../config/config.json')["default"].hostName;
 
+    try {
+        var prodHostName = require('../config/configProd.json')["production"].hostName;
+        if (prodHostName) {
+            hostName = prodHostName;
+        }
+    } catch (e) {
+        console.log(e);
+    }
+
     AWS.config = {
         "accessKeyId": s3Config.accessKeyId, 
         "secretAccessKey": s3Config.secret, 
@@ -121,6 +130,7 @@ module.exports = function (router) {
                                     "media_type": link.dataValues.media_type,
                                     "user_name": link.dataValues.user_name,
                                     "created_at": link.dataValues.createdAt,
+                                    "final": link.dataValues.final,
                                     "type": "preview"
                                 });
                             });
@@ -142,6 +152,7 @@ module.exports = function (router) {
                                     "media_type": link.dataValues.media_type,
                                     "user_name": link.dataValues.user_name,
                                     "created_at": link.dataValues.createdAt,
+                                    "final": link.dataValues.final,
                                     "type": "actual"
                                 });
                             });
@@ -325,6 +336,7 @@ module.exports = function (router) {
                         for (var i = 0; i < fileStreams.length; i++) {
                             if (fileStreams[i].fieldName === validResults[index].fieldfilename) {
                                 validResults[index].uniquefilename = fileStreams[i].uniqueName;
+                                validResults[index].final = "false";
                             }
                         }
                     }
@@ -490,7 +502,7 @@ module.exports = function (router) {
                         tempObj.uniqueactualfilename = validResults[j].uniquefilename;
                         tempObj.amazon_key_preview = validResults[j].user_name + "/" + storedLink.uniquefilename;
                         tempObj.amazon_key_actual = validResults[j].user_name + "/" + tempObj.uniqueactualfilename;
-                        tempObj.finalize = "true";
+                        tempObj.final = "true";
                         linksData.push(tempObj);
                         j++;
                     });
@@ -505,7 +517,7 @@ module.exports = function (router) {
                                 uniqueactualfilename: linkData.uniqueactualfilename,
                                 amazon_key_preview: linkData.amazon_key_preview,
                                 amazon_key_actual: linkData.amazon_key_actual,
-                                finalize: "true"               //CHANGE FINALIZE TO TRUE AFTER DONE
+                                final: "true"               //CHANGE FINALIZE TO TRUE AFTER DONE
                             }, {
                                 where: {
                                     link_url: linkData.link_url,
