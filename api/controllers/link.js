@@ -54,7 +54,15 @@ module.exports = function (router) {
         s3Config = require('../config/config.json')["default"].s3,
         mediaTypes = require('../config/config.json')["default"].media_types,
         uploadDirectoryName = require('../config/config.json')["default"]["storage"].uploadDirectoryName,
-        hostName = require('../config/config.json')["default"].hostName;
+        hostName = require('../config/config.json')["default"].hostName,
+        winston = require('winston');
+
+        var logger = new (winston.Logger)({
+            transports: [
+            new (winston.transports.Console)(),
+            new (winston.transports.File)({ filename: 'link.log' })
+            ]
+        });
 
     try {
         var prodHostName = require('../config/configProd.json')["production"].hostName;
@@ -90,7 +98,7 @@ module.exports = function (router) {
                 params,
                 finalState = false;
 
-            console.log("In Links function");
+            logger.log('info', 'Calling /link/ ' + req.params.link_url + '');
             if (links.length < 1) {
                 dict.message ='No links found';
                 dict.links_found = links.length;
@@ -111,6 +119,7 @@ module.exports = function (router) {
                 //If the link is finalized, generate presigned GET URLS from S3
                 //else the link isn't finalized, then send GET links from public /uploads folder
                 if (finalState) {
+                    logger.log('info', 'Link is final... generating S3 presigned URLs');
                     s3Instance = new AWS.S3();
 
                     links.forEach(function(link) {
@@ -192,6 +201,8 @@ module.exports = function (router) {
                                 temp[res.id].presignedGetURL = undefined;
                             }
                         });
+                        
+                        logger.log('info', 'Finished generating S3 presigned URLs and returning');
 
                         res.statusCode = 201;
                         res.json({
@@ -206,6 +217,8 @@ module.exports = function (router) {
                     links.forEach(function(link){
                         link.setDataValue("temp_link", hostName + uploadDirectoryName + "/" + encodeURIComponent(link.getDataValue("uniquefilename")));
                     });
+
+                    logger.log('info', 'Link is not final... generating temp local URLs');
 
                     res.statusCode = 200;
                     res.json({
@@ -277,15 +290,20 @@ module.exports = function (router) {
             tempFile,
             fileStreams = [];
 
+        logger.log('info', 'Hit Preview URL!!!');
+
         //Store the uploaded files into /upload directory
         //file name will correspond username/[timestamp]
         busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
             console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
+            logger.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
             file.on('data', function(data) {
-                console.log('File [' + fieldname + '] got ' + data.length + ' bytes');
+                //console.log('File [' + fieldname + '] got ' + data.length + ' bytes');
+                logger.log('File [' + fieldname + '] got ' + data.length + ' bytes');
             });
             file.on('end', function() {
-                console.log('File [' + fieldname + '] Finished');
+                //console.log('File [' + fieldname + '] Finished');
+                logger.log('File [' + fieldname + '] Finished');
             });
 
             tempFileName = Date.now() + '-preview-' + filename;
@@ -294,7 +312,8 @@ module.exports = function (router) {
                 fieldName: fieldname,
                 uniqueName: tempFileName
             });
-            console.log("Writing file... ");
+            //console.log("Writing file... ");
+            logger.log('info', 'Writing file...');
             file.pipe(fs.createWriteStream("./" + uploadDirectoryName + "/" + tempFileName));
         });
         busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
@@ -304,10 +323,14 @@ module.exports = function (router) {
             if (fieldname === "data") {
                 data = JSON.parse(decodeURIComponent(val));
             }
+
+            logger.log('info', 'Got field event handler');
         });
         busboy.on('finish', function() {
             console.log('Finished all uploading!');
+            logger.log('Finished all uploading!');
 
+            logger.log('uploading and data parsing complete... DB access time!');
             if (data) {
                 for (var index = 0; index < data.data.length; index++) {
                     for (var key in acceptedField) {
@@ -332,6 +355,7 @@ module.exports = function (router) {
                         concatenatedFileName,
                         currentFinal = false;
 
+                    logger.log('DB access complete... going through links!');
                     for (var index = 0; index < validResults.length; index++) {
                         for (var i = 0; i < fileStreams.length; i++) {
                             if (fileStreams[i].fieldName === validResults[index].fieldfilename) {
@@ -349,6 +373,7 @@ module.exports = function (router) {
                     });
 
                     if (!currentFinal) {
+                        logger.log('Links not final, so doing DB deletes and then create!');
                         //delete all the rows that had the same link_url, then create brand new ones
                         Link.destroy({
                             where: {
@@ -356,6 +381,7 @@ module.exports = function (router) {
                             }
                         }).then(function(){
                             Link.bulkCreate(validResults).then(function(links) {
+                                logger.log('DB delete and create compelete. Returning!');
                                 res.statusCode = 200;
                                 res.json({
                                     result: links,
@@ -364,6 +390,7 @@ module.exports = function (router) {
                             });
                         });
                     } else {
+                        logger.log('Links are final already... Return!');
                         dict.result = links;
                         dict.message ="Link has already been finalized!";
                         dict.links_found = links.length;

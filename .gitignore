@@ -6,3 +6,4 @@ app/build/config/config.json
 api/node_modules
 api/config/configProd.json
 api/uploads
+api/link.log
