@@ -20,7 +20,8 @@ define([
           model,
           linkUrl,
           rendered,
-          data = {};
+          data = {},
+          finalized = false;
 
       if (!args.linkUrl) {
         console.log('no url...');
@@ -43,16 +44,20 @@ define([
             "picture": [],
             "voice": [],
             "video": [],
-            "text": []
+            "text": [],
+            "location": []
           };
           result.link_exist = links.length > 0;
           result.linkUrl = linkUrl;
 
           links.each(function (model){
+            finalized = model.get("final") === "true" ? true : false;
             result.data[model.get("media_type")].push(model.toJSON());
           });
 
+          result.finalized = finalized;
           result.data = self.sortMedia(result.data);
+          result.nonPictures = self.nonPictures;
 
           rendered = Mustache.to_html(linkTemplate, result);
           self.$el.html(rendered);
@@ -76,6 +81,10 @@ define([
 
     sortMedia: function(data) {
       var pictures,
+          videos,
+          voiceMemos,
+          locations,
+          nonPictures = false,
           arrLength;
 
       //Sorting pictures into 2 columns
@@ -87,6 +96,43 @@ define([
         data["picture"]["column1"] = pictures.splice(0, arrLength / 2);
         data["picture"]["column2"] = pictures;
       }
+
+      data["nonPics"] = {};
+
+      videos = data["video"];
+      if (videos.length > 0) {
+        nonPictures = true;
+        data["nonPics"]["video"] = [];
+        videos.forEach(function(media){
+          data.nonPics.video.push(media);
+        });
+
+        delete data["video"];
+      }
+
+      voiceMemos = data["voice"];
+      if (voiceMemos.length > 0) {
+        nonPictures = true;
+        data["nonPics"]["voice"] = [];
+        voiceMemos.forEach(function(media){
+          data.nonPics.voice.push(media);
+        });
+
+        delete data["voice"];
+      }
+
+      locations = data["location"];
+      if (locations.length > 0) {
+        nonPictures = true;
+        data["nonPics"]["location"] = [];
+        locations.forEach(function(media){
+          data.nonPics.location.push(media);
+        });
+
+        delete data["location"];
+      }
+
+      this.nonPictures = nonPictures;
 
       return data;
     },

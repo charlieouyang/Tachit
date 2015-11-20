@@ -6,7 +6,17 @@
     padding: 10px 50px 10px 50px;
 
     img, video, audio {
-        width: 100%;
+      width: 100%;
+    }
+
+    .location-tag {
+      .location-icon {
+        font-size: 24px;
+      }
+
+      .text {
+        font-size: 18px;
+      }
     }
   }
 
