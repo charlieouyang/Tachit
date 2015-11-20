@@ -57,12 +57,12 @@ module.exports = function (router) {
         hostName = require('../config/config.json')["default"].hostName,
         winston = require('winston');
 
-        var logger = new (winston.Logger)({
-            transports: [
+    var logger = new (winston.Logger)({
+        transports: [
             new (winston.transports.Console)(),
             new (winston.transports.File)({ filename: 'link.log' })
-            ]
-        });
+        ]
+    });
 
     try {
         var prodHostName = require('../config/configProd.json')["production"].hostName;
@@ -140,7 +140,8 @@ module.exports = function (router) {
                                     "user_name": link.dataValues.user_name,
                                     "created_at": link.dataValues.createdAt,
                                     "final": link.dataValues.final,
-                                    "type": "preview"
+                                    "type": "preview",
+                                    "link_url": link.dataValues.link_url
                                 });
                             });
                         });
@@ -162,7 +163,8 @@ module.exports = function (router) {
                                     "user_name": link.dataValues.user_name,
                                     "created_at": link.dataValues.createdAt,
                                     "final": link.dataValues.final,
-                                    "type": "actual"
+                                    "type": "actual",
+                                    "link_url": link.dataValues.link_url
                                 });
                             });
                         });
@@ -204,7 +206,7 @@ module.exports = function (router) {
                         
                         logger.log('info', 'Finished generating S3 presigned URLs and returning');
 
-                        res.statusCode = 201;
+                        res.statusCode = 200;
                         res.json({
                             "message": "Links found!",
                             "links_found": resultArray.length,
@@ -215,7 +217,7 @@ module.exports = function (router) {
 
                 } else {
                     links.forEach(function(link){
-                        link.setDataValue("temp_link", hostName + uploadDirectoryName + "/" + encodeURIComponent(link.getDataValue("uniquefilename")));
+                        link.setDataValue("temp_link", hostName + "api/" + uploadDirectoryName + "/" + encodeURIComponent(link.getDataValue("uniquefilename")));
                     });
 
                     logger.log('info', 'Link is not final... generating temp local URLs');
@@ -223,7 +225,7 @@ module.exports = function (router) {
                     res.statusCode = 200;
                     res.json({
                         result: links,
-                        message: "Updated previous links with new data"
+                        message: "Links found!"
                     });
                 }
 
@@ -290,20 +292,21 @@ module.exports = function (router) {
             tempFile,
             fileStreams = [];
 
-        logger.log('info', 'Hit Preview URL!!!');
+        //logger.log('info', 'Hit Preview URL!!!');
 
         //Store the uploaded files into /upload directory
         //file name will correspond username/[timestamp]
         busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
             console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
-            logger.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
+            //logger.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
             file.on('data', function(data) {
-                //console.log('File [' + fieldname + '] got ' + data.length + ' bytes');
-                logger.log('File [' + fieldname + '] got ' + data.length + ' bytes');
+                console.log('File [' + fieldname + '] got ' + data.length + ' bytes');
+                //logger.log('File [' + fieldname + '] got ' + data.length + ' bytes');
             });
             file.on('end', function() {
-                //console.log('File [' + fieldname + '] Finished');
-                logger.log('File [' + fieldname + '] Finished');
+                console.log('File [' + fieldname + '] Finished');
+                //file.resume();
+                //logger.log('File [' + fieldname + '] Finished');
             });
 
             tempFileName = Date.now() + '-preview-' + filename;
@@ -313,7 +316,7 @@ module.exports = function (router) {
                 uniqueName: tempFileName
             });
             //console.log("Writing file... ");
-            logger.log('info', 'Writing file...');
+            //logger.log('info', 'Writing file...');
             file.pipe(fs.createWriteStream("./" + uploadDirectoryName + "/" + tempFileName));
         });
         busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
@@ -324,13 +327,13 @@ module.exports = function (router) {
                 data = JSON.parse(decodeURIComponent(val));
             }
 
-            logger.log('info', 'Got field event handler');
+            //logger.log('info', 'Got field event handler');
         });
         busboy.on('finish', function() {
             console.log('Finished all uploading!');
-            logger.log('Finished all uploading!');
+            //logger.log('Finished all uploading!');
 
-            logger.log('uploading and data parsing complete... DB access time!');
+            //logger.log('uploading and data parsing complete... DB access time!');
             if (data) {
                 for (var index = 0; index < data.data.length; index++) {
                     for (var key in acceptedField) {
@@ -572,7 +575,7 @@ module.exports = function (router) {
                                     console.log(linksData[i].uniqueactualfilename);
 
                                     body = fs.createReadStream(uploadDirectoryName + "/" + linksData[i].uniqueactualfilename);
-                                    s3obj = new AWS.S3({params: {Bucket: s3Config.bucket , Key: "kevinouyang/" + linksData[i].uniqueactualfilename}});
+                                    s3obj = new AWS.S3({params: {Bucket: s3Config.bucket , Key: linksData[(i % linksData.length)].user_name + "/" + linksData[i].uniqueactualfilename}});
                                     s3obj.upload({
                                         Body: body
                                     }).on('httpUploadProgress', function(evt) { 
@@ -587,7 +590,7 @@ module.exports = function (router) {
                                     console.log(linksData[(i % linksData.length)].uniquefilename);
 
                                     body = fs.createReadStream(uploadDirectoryName + "/" + linksData[(i % linksData.length)].uniquefilename);
-                                    s3obj = new AWS.S3({params: {Bucket: s3Config.bucket , Key: "kevinouyang/" + linksData[(i % linksData.length)].uniquefilename}});
+                                    s3obj = new AWS.S3({params: {Bucket: s3Config.bucket , Key: linksData[(i % linksData.length)].user_name + "/" + linksData[(i % linksData.length)].uniquefilename}});
                                     s3obj.upload({
                                         Body: body
                                     }).on('httpUploadProgress', function(evt) { 
@@ -599,7 +602,7 @@ module.exports = function (router) {
                                     });
                                 } else {
                                     dict.result = linksData;
-                                    dict.message ="Uploaded!";
+                                    dict.message ="Finalized!";
                                     dict.links_found = linksData.length;
                                     res.statusCode = 200;
                                     res.json(dict);
