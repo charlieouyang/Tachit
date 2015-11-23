@@ -84,8 +84,10 @@ define([
           videos,
           voiceMemos,
           locations,
+          textBlocks,
           nonPictures = false,
-          arrLength;
+          arrLength,
+          self = this;
 
       //Sorting pictures into 2 columns
       pictures = data["picture"];
@@ -132,9 +134,25 @@ define([
         delete data["location"];
       }
 
+      textBlocks = data["text"];
+      if (textBlocks.length > 0) {
+        nonPictures = true;
+        data["nonPics"]["text"] = [];
+        textBlocks.forEach(function(media){
+          media.description = self.replaceAll(media.description, "\n", "<br>");
+          data.nonPics.text.push(media);
+        });
+
+        delete data["text"];
+      }
+
       this.nonPictures = nonPictures;
 
       return data;
+    },
+
+    replaceAll: function(str, find, replace) {
+      return str.replace(new RegExp(find, 'g'), replace);
     },
 
     openMediaModal: function(e) {
