@@ -42,6 +42,13 @@
                             </div>
                         </div>
                     {{/location}}
+                    {{#text}}
+                        <div class="mediaContainer" id="{{id}}" media-type="{{media_type}}">
+                            <div class="text-block">
+                                <p class="text">{{{description}}}</p>
+                            </div>
+                        </div>
+                    {{/text}}
                     {{#video}}
                         <div class="mediaContainer" id="{{id}}" media-type="{{media_type}}">
                             <a href="{{#finalized}}{{actual_presigned_url}}{{/finalized}}{{^finalized}}{{temp_link}}{{/finalized}}" data-toggle="lightbox" data-gallery="media" data-title="{{name}}" data-footer="{{description}}">
